@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Phrazia Katwaza's Portfolio - Web Development, Computer Networks, and Cybersecurity Projects">
+    <meta name="keywords" content="web development, computer networks, cybersecurity, information security, portfolio, projects">
+    <meta name="author" content="Phrazia Katwaza">
+    <title>Phrazia Katwaza | Projects</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/print.css" media="print">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Internal CSS for projects page specific styling */
+        .projects-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .project-card {
+            background-color: var(--bg-secondary);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.1);
+        }
+
+        .project-content {
+            padding: 20px;
+        }
+
+        .project-category {
+            display: inline-block;
+            background-color: var(--primary-light);
+            color: var(--primary-dark);
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .project-description {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .tech-tag {
+            background-color: var(--bg-primary);
+            color: var(--text-secondary);
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .project-link:hover {
+            color: var(--primary-dark);
+        }
+
+        .project-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            background-color: var(--bg-primary);
+            padding: 0 20px;
+        }
+
+        .project-details.active {
+            max-height: 500px;
+            padding: 20px;
+        }
+
+        .details-toggle {
+            display: block;
+            text-align: center;
+            padding: 10px;
+            background-color: var(--primary-light);
+            color: var(--primary-dark);
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+
+        .details-toggle:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 20px;
+            background-color: var(--bg-secondary);
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        @media screen and (max-width: 1024px) {
+            .projects-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .projects-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>PK</h1>
+        </div>
+        <nav>
+            <div class="hamburger">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="projects.html" class="active">Projects</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="survey.html">Survey</a></li>
+            </ul>
+        </nav>
+        <div class="theme-toggle">
+            <i class="fas fa-moon"></i>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <h1>My Projects</h1>
+            <p>Showcasing my work in web development, computer networks, and cybersecurity</p>
+        </section>
+
+        <div class="filter-container">
+            <button class="filter-btn active" data-filter="all">All Projects</button>
+            <button class="filter-btn" data-filter="web">Web Development</button>
+            <button class="filter-btn" data-filter="network">Computer Networks</button>
+            <button class="filter-btn" data-filter="security">Cybersecurity</button>
+        </div>
+
+        <section class="projects-container">
+            <!-- Project 1 -->
+            <div class="project-card" data-category="security">
+                <div class="project-image">
+                    <img src="images/project1.jpg" alt="Network Security Monitoring System">
+                </div>
+                <div class="project-content">
+                    <span class="project-category">Cybersecurity</span>
+                    <h3 class="project-title">Network Security Monitoring System</h3>
+                    <p class="project-description">Developed a comprehensive network security monitoring system that detects and alerts on suspicious activities.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Wireshark</span>
+                        <span class="tech-tag">Snort</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                        <a href="#" class="project-link"><i class="fab fa-github"></i> GitHub</a>
+                    </div>
+                </div>
+                <div class="details-toggle" data-project="1">View Details</div>
+                <div class="project-details" id="details-1">
+                    <h4>Project Overview</h4>
+                    <p>This network security monitoring system was designed to provide real-time threat detection and analysis for small to medium-sized networks. The system uses machine learning algorithms to identify anomalous network behavior and potential security breaches.</p>
+                    <h4>Key Features</h4>
+                    <ul>
+                        <li>Real-time packet analysis and traffic monitoring</li>
+                        <li>Customizable alert system for different threat levels</li>
+                        <li>Detailed logging and reporting capabilities</li>
+                        <li>Integration with existing security infrastructure</li>
+                    </ul>
+                    <h4>Technical Challenges</h4>
+                    <p>The main challenge was optimizing the system to handle high-volume network traffic without performance degradation. This was solved by implementing efficient data processing algorithms and strategic packet sampling.</p>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="project-card" data-category="web">
+                <div class="project-image">
+                    <img src="images/project2.jpg" alt="E-commerce Website">
+                </div>
+                <div class="project-content">
+                    <span class="project-category">Web Development</span>
+                    <h3 class="project-title">E-commerce Website</h3>
+                    <p class="project-description">Designed and developed a fully responsive e-commerce platform with secure payment integration.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">PHP</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                        <a href="#" class="project-link"><i class="fab fa-github"></i> GitHub</a>
+                    </div>
+                </div>
+                <div class="details-toggle" data-project="2">View Details</div>
+                <div class="project-details" id="details-2">
+                    <h4>Project Overview</h4>
+                    <p>This e-commerce website was built from scratch to provide a seamless shopping experience. It features a clean, intuitive interface with robust backend functionality for inventory management and order processing.</p>
+                    <h4>Key Features</h4>
+                    <ul>
+                        <li>Responsive design for all device sizes</li>
+                        <li>Secure payment gateway integration</li>
+                        <li>User account management and order history</li>
+                        <li>Admin dashboard for inventory and order management</li>
+                    </ul>
+                    <h4>Technical Challenges</h4>
+                    <p>Implementing a secure payment system while maintaining a smooth user experience was challenging. I solved this by using industry-standard encryption and carefully designing the checkout flow to minimize friction.</p>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="project-card" data-category="network">
+                <div class="project-image">
+                    <img src="images/project3.jpg" alt="Network Infrastructure Design">
+                </div>
+                <div class="project-content">
+                    <span class="project-category">Computer Networks</span>
+                    <h3 class="project-title">Network Infrastructure Design</h3>
+                    <p class="project-description">Designed and implemented a scalable network infrastructure for a medium-sized organization.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Cisco</span>
+                        <span class="tech-tag">VLAN</span>
+                        <span class="tech-tag">Routing</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link"><i class="fas fa-file-pdf"></i> Case Study</a>
+                        <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> Documentation</a>
+                    </div>
+                </div>
+                <div class="details-toggle" data-project="3">View Details</div>
+                <div class="project-details" id="details-3">
+                    <h4>Project Overview</h4>
+                    <p>This project involved designing and implementing a complete network infrastructure for a company with 200+ employees across multiple departments. The solution included segmented VLANs, redundant connections, and comprehensive security measures.</p>
+                    <h4>Key Features</h4>
+                    <ul>
+                        <li>Segmented network design with VLANs for department isolation</li>
+                        <li>Redundant connections for high availability</li>
+                        <li>Centralized network management system</li>
+                        <li>Scalable architecture to accommodate future growth</li>
+                    </ul>
+                    <h4>Technical Challenges</h4>
+                    <p>Balancing security requirements with ease of access was a significant challenge. I implemented a role-based access control system that provided appropriate access levels while maintaining strong security boundaries.</p>
+                </div>
+            </div>
+
+            <!-- Project 4 -->
+            <div class="project-card" data-category="security">
+                <div class="project-image">
+                    <img src="images/project4.jpg" alt="Vulnerability Assessment Tool">
+                </div>
+                <div class="project-content">
+                    <span class="project-category">Cybersecurity</span>
+                    <h3 class="project-title">Vulnerability Assessment Tool</h3>
+                    <p class="project-description">Developed an automated tool for identifying and reporting security vulnerabilities in web applications.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">OWASP</span>
+                        <span class="tech-tag">Penetration Testing</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link"><i class="fab fa-github"></i> GitHub</a>
+                        <a href="#" class="project-link"><i class="fas fa-file-alt"></i> Documentation</a>
+                    </div>
+                </div>
+                <div class="details-toggle" data-project="4">View Details</div>
+                <div class="project-details" id="details-4">
+                    <h4>Project Overview</h4>
+                    <p>This vulnerability assessment tool automates the process of identifying common security flaws in web applications based on OWASP Top 10 vulnerabilities. It generates comprehensive reports with remediation recommendations.</p>
+                    <h4>Key Features</h4>
+                    <ul>
+                        <li>Automated scanning for OWASP Top 10 vulnerabilities</li>
+                        <li>Detailed reporting with severity ratings</li>
+                        <li>Remediation suggestions for identified vulnerabilities</li>
+                        <li>Low false-positive rate through intelligent verification</li>
+                    </ul>
+                    <h4>Technical Challenges</h4>
+                    <p>Reducing false positives while maintaining comprehensive coverage was challenging. I implemented a multi-stage verification process that significantly improved accuracy without compromising detection capabilities.</p>
+                </div>
+            </div>
+
+            <!-- Project 5 -->
+            <div class="project-card" data-category="web">
+                <div class="project-image">
+                    <img src="images/project5.jpg" alt="Portfolio Website">
+                </div>
+                <div class="project-content">
+                    <span class="project-category">Web Development</span>
+                    <h3 class="project-title">Portfolio Website</h3>
+                    <p class="project-description">Designed and developed a responsive portfolio website to showcase professional work and skills.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                        <span class="tech-tag">JavaScript</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                        <a href="#" class="project-link"><i class="fab fa-github"></i> GitHub</a>
+                    </div>
+                </div>
+                <div class="details-toggle" data-project="5">View Details</div>
+                <div class="project-details" id="details-5">
+                    <h4>Project Overview</h4>
+                    <p>This portfolio website was created to showcase my skills, projects, and professional experience in a clean, modern design. The site features responsive layouts and interactive elements to enhance user engagement.</p>
+                    <h4>Key Features</h4>
+                    <ul>
+                        <li>Fully responsive design for all device sizes</li>
+                        <li>Interactive project gallery with filtering</li>
+                        <li>Dark/light mode toggle for user preference</li>
+                        <li>Contact form with validation</li>
+                    </ul>
+                    <h4>Technical Challenges</h4>
+                    <p>Creating a seamless experience across all device sizes while maintaining visual appeal was challenging. I implemented a mobile-first approach with carefully designed breakpoints to ensure optimal viewing on all devices.</p>
+                </div>
+            </div>
+
+            <!-- Project 6 -->
+            <div class="project-card" data-category="network">
+                <div class="project-image">
+                    <img src="images/project6.jpg" alt="Network Traffic Analyzer">
+                </div>
+                <div class="project-content">
+                    <span class="project-category">Computer Networks</span>
+                    <h3 class="project-title">Network Traffic Analyzer</h3>
+                    <p class="project-description">Developed a tool for analyzing network traffic patterns and identifying bandwidth usage anomalies.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Wireshark</span>
+                        <span class="tech-tag">Data Visualization</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link"><i class="fab fa-github"></i> GitHub</a>
+                        <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> Demo</a>
+                    </div>
+                </div>
+                <div class="details-toggle" data-project="6">View Details</div>
+                <div class="project-details" id="details-6">
+                    <h4>Project Overview</h4>
+                    <p>This network traffic analyzer provides real-time insights into network usage patterns, helping administrators identify bandwidth bottlenecks, unusual traffic patterns, and potential security issues.</p>
+                    <h4>Key Features</h4>
+                    <ul>
+                        <li>Real-time traffic monitoring and analysis</li>
+                        <li>Interactive data visualizations for traffic patterns</li>
+                        <li>Anomaly detection for unusual network behavior</li>
+                        <li>Historical data comparison and trending</li>
+                    </ul>
+                    <h4>Technical Challenges</h4>
+                    <p>Processing and visualizing large volumes of network data in real-time required efficient algorithms and data structures. I implemented a custom data processing pipeline that significantly reduced latency while maintaining accuracy.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="youtube-demo">
+            <div class="section-header">
+                <h2>Project Demonstration</h2>
+                <p>Watch a demonstration of my Network Security Monitoring System</p>
+            </div>
+            <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Project Demonstration" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Phrazia Katwaza</h3>
+                <p>Computer Networks & Information Security Engineering Student passionate about creating secure digital solutions.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <div class="social-icons">
+                    <a href="https://linkedin.com/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="mailto:phrazia.katwaza@example.com"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Phrazia Katwaza. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        // Projects page specific JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            // Project details toggle
+            const detailsToggles = document.querySelectorAll('.details-toggle');
+            
+            detailsToggles.forEach(toggle => {
+                toggle.addEventListener('click', function() {
+                    const projectId = this.getAttribute('data-project');
+                    const detailsElement = document.getElementById(`details-${projectId}`);
+                    
+                    if (detailsElement.classList.contains('active')) {
+                        detailsElement.classList.remove('active');
+                        this.textContent = 'View Details';
+                    } else {
+                        detailsElement.classList.add('active');
+                        this.textContent = 'Hide Details';
+                    }
+                });
+            });
+            
+            // Project filtering
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const projectCards = document.querySelectorAll('.project-card');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    const filter = this.getAttribute('data-filter');
+                    
+                    projectCards.forEach(card => {
+                        if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

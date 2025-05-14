@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Phrazia Katwaza - Survey Form">
+    <meta name="keywords" content="survey, feedback, web development, computer networks, cybersecurity, information security">
+    <meta name="author" content="Phrazia Katwaza">
+    <title>Phrazia Katwaza | Survey</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/print.css" media="print">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Internal CSS for survey page specific styling */
+        .survey-container {
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 40px;
+            background-color: var(--bg-secondary);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .survey-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .survey-header h2 {
+            font-size: 2rem;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+
+        .survey-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="number"],
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px var(--primary-light);
+            outline: none;
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .radio-group,
+        .checkbox-group {
+            margin-top: 10px;
+        }
+
+        .radio-option,
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .radio-option input,
+        .checkbox-option input {
+            margin-right: 10px;
+        }
+
+        .rating-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .rating-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .rating-label {
+            flex: 1;
+        }
+
+        .rating-stars {
+            display: flex;
+            gap: 5px;
+        }
+
+        .rating-stars input {
+            display: none;
+        }
+
+        .rating-stars label {
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: #ddd;
+            transition: color 0.3s ease;
+        }
+
+        .rating-stars input:checked ~ label {
+            color: #ffc107;
+        }
+
+        .rating-stars label:hover,
+        .rating-stars label:hover ~ label {
+            color: #ffc107;
+        }
+
+        .submit-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .required {
+            color: #e74c3c;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 0.9rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        @media screen and (max-width: 768px) {
+            .survey-container {
+                padding: 20px;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>PK</h1>
+        </div>
+        <nav>
+            <div class="hamburger">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="survey.html" class="active">Survey</a></li>
+            </ul>
+        </nav>
+        <div class="theme-toggle">
+            <i class="fas fa-moon"></i>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <h1>Feedback Survey</h1>
+            <p>Help me improve by sharing your thoughts</p>
+        </section>
+
+        <section class="survey-container">
+            <div class="survey-header">
+                <h2>Website Feedback Survey</h2>
+                <p>Your feedback is valuable in helping me improve my portfolio website and services. This survey will take approximately 5 minutes to complete.</p>
+            </div>
+            
+            <div class="success-message" id="success-message">
+                Thank you for completing the survey! Your feedback is greatly appreciated.
+            </div>
+            
+            <form id="survey-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Full Name <span class="required">*</span></label>
+                        <input type="text" id="name" name="name" required>
+                        <div class="error-message" id="name-error">Please enter your name</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" required>
+                        <div class="error-message" id="email-error">Please enter a valid email address</div>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="age">Age</label>
+                        <input type="number" id="age" name="age" min="18" max="100">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="occupation">Occupation</label>
+                        <input type="text" id="occupation" name="occupation">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>How did you find my website? <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="source-search" name="source" value="search" required>
+                            <label for="source-search">Search Engine</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="source-social" name="source" value="social">
+                            <label for="source-social">Social Media</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="source-referral" name="source" value="referral">
+                            <label for="source-referral">Referral from a friend</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="source-other" name="source" value="other">
+                            <label for="source-other">Other</label>
+                        </div>
+                    </div>
+                    <div class="error-message" id="source-error">Please select how you found the website</div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Which sections of my portfolio did you find most interesting? (Select all that apply)</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="section-about" name="interesting_sections" value="about">
+                            <label for="section-about">About Me</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="section-projects" name="interesting_sections" value="projects">
+                            <label for="section-projects">Projects</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="section-skills" name="interesting_sections" value="skills">
+                            <label for="section-skills">Skills & Expertise</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="section-contact" name="interesting_sections" value="contact">
+                            <label for="section-contact">Contact Information</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="interest-area">Which area of my expertise are you most interested in? <span class="required">*</span></label>
+                    <select id="interest-area" name="interest_area" required>
+                        <option value="">Select an option</option>
+                        <option value="web-development">Web Development</option>
+                        <option value="network-security">Network Security</option>
+                        <option value="cybersecurity">Cybersecurity</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <div class="error-message" id="interest-area-error">Please select an area of interest</div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Please rate the following aspects of my website:</label>
+                    <div class="rating-container">
+                        <div class="rating-item">
+                            <div class="rating-label">Design & Visual Appeal</div>
+                            <div class="rating-stars">
+                                <input type="radio" id="design-1" name="design_rating" value="1">
+                                <label for="design-1">★</label>
+                                <input type="radio" id="design-2" name="design_rating" value="2">
+                                <label for="design-2">★</label>
+                                <input type="radio" id="design-3" name="design_rating" value="3">
+                                <label for="design-3">★</label>
+                                <input type="radio" id="design-4" name="design_rating" value="4">
+                                <label for="design-4">★</label>
+                                <input type="radio" id="design-5" name="design_rating" value="5">
+                                <label for="design-5">★</label>
+                            </div>
+                        </div>
+                        
+                        <div class="rating-item">
+                            <div class="rating-label">Content Quality</div>
+                            <div class="rating-stars">
+                                <input type="radio" id="content-1" name="content_rating" value="1">
+                                <label for="content-1">★</label>
+                                <input type="radio" id="content-2" name="content_rating" value="2">
+                                <label for="content-2">★</label>
+                                <input type="radio" id="content-3" name="content_rating" value="3">
+                                <label for="content-3">★</label>
+                                <input type="radio" id="content-4" name="content_rating" value="4">
+                                <label for="content-4">★</label>
+                                <input type="radio" id="content-5" name="content_rating" value="5">
+                                <label for="content-5">★</label>
+                            </div>
+                        </div>
+                        
+                        <div class="rating-item">
+                            <div class="rating-label">Ease of Navigation</div>
+                            <div class="rating-stars">
+                                <input type="radio" id="navigation-1" name="navigation_rating" value="1">
+                                <label for="navigation-1">★</label>
+                                <input type="radio" id="navigation-2" name="navigation_rating" value="2">
+                                <label for="navigation-2">★</label>
+                                <input type="radio" id="navigation-3" name="navigation_rating" value="3">
+                                <label for="navigation-3">★</label>
+                                <input type="radio" id="navigation-4" name="navigation_rating" value="4">
+                                <label for="navigation-4">★</label>
+                                <input type="radio" id="navigation-5" name="navigation_rating" value="5">
+                                <label for="navigation-5">★</label>
+                            </div>
+                        </div>
+                        
+                        <div class="rating-item">
+                            <div class="rating-label">Overall Experience</div>
+                            <div class="rating-stars">
+                                <input type="radio" id="overall-1" name="overall_rating" value="1">
+                                <label for="overall-1">★</label>
+                                <input type="radio" id="overall-2" name="overall_rating" value="2">
+                                <label for="overall-2">★</label>
+                                <input type="radio" id="overall-3" name="overall_rating" value="3">
+                                <label for="overall-3">★</label>
+                                <input type="radio" id="overall-4" name="overall_rating" value="4">
+                                <label for="overall-4">★</label>
+                                <input type="radio" id="overall-5" name="overall_rating" value="5">
+                                <label for="overall-5">★</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="suggestions">Do you have any suggestions for improving my portfolio website? <span class="required">*</span></label>
+                    <textarea id="suggestions" name="suggestions" required></textarea>
+                    <div class="error-message" id="suggestions-error">Please provide your suggestions</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="collaboration">Would you be interested in collaborating on a project? If yes, please describe briefly.</label>
+                    <textarea id="collaboration" name="collaboration"></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">Submit Survey</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Phrazia Katwaza</h3>
+                <p>Computer Networks & Information Security Engineering Student passionate about creating secure digital solutions.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <div class="social-icons">
+                    <a href="https://linkedin.com/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="mailto:phrazia.katwaza@example.com"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Phrazia Katwaza. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        // Survey page specific JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            const surveyForm = document.getElementById('survey-form');
+            const successMessage = document.getElementById('success-message');
+            
+            surveyForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Reset error messages
+                const errorMessages = document.querySelectorAll('.error-message');
+                errorMessages.forEach(msg => msg.style.display = 'none');
+                
+                // Form validation
+                let isValid = true;
+                
+                // Validate name
+                const nameInput = document.getElementById('name');
+                if (!nameInput.value.trim()) {
+                    document.getElementById('name-error').style.display = 'block';
+                    isValid = false;
+                }
+                
+                // Validate email with regex
+                const emailInput = document.getElementById('email');
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(emailInput.value)) {
+                    document.getElementById('email-error').style.display = 'block';
+                    isValid = false;
+                }
+                
+                // Validate source (radio buttons)
+                const sourceInputs = document.querySelectorAll('input[name="source"]');
+                let sourceSelected = false;
+                sourceInputs.forEach(input => {
+                    if (input.checked) {
+                        sourceSelected = true;
+                    }
+                });
+                if (!sourceSelected) {
+                    document.getElementById('source-error').style.display = 'block';
+                    isValid = false;
+                }
+                
+                // Validate interest area (select)
+                const interestArea = document.getElementById('interest-area');
+                if (!interestArea.value) {
+                    document.getElementById('interest-area-error').style.display = 'block';
+                    isValid = false;
+                }
+                
+                // Validate suggestions
+                const suggestionsInput = document.getElementById('suggestions');
+                if (!suggestionsInput.value.trim()) {
+                    document.getElementById('suggestions-error').style.display = 'block';
+                    isValid = false;
+                }
+                
+                // If form is valid, show success message and reset form
+                if (isValid) {
+                    successMessage.style.display = 'block';
+                    surveyForm.reset();
+                    
+                    // Reset star ratings
+                    const ratingInputs = document.querySelectorAll('.rating-stars input');
+                    ratingInputs.forEach(input => {
+                        input.checked = false;
+                    });
+                    
+                    // Hide success message after 5 seconds
+                    setTimeout(() => {
+                        successMessage.style.display = 'none';
+                    }, 5000);
+                    
+                    // Scroll to top of form
+                    surveyForm.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+            
+            // Input focus event listeners for real-time validation
+            const inputs = surveyForm.querySelectorAll('input, textarea, select');
+            inputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    // Clear error message when input is focused
+                    const errorId = this.id + '-error';
+                    const errorElement = document.getElementById(errorId);
+                    if (errorElement) {
+                        errorElement.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
